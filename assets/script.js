@@ -26,7 +26,7 @@ function getWeatherData(event){
 
 	// API URL
 	const base =
-`http://api.openweathermap.org/data/2.5/weather?q=${city_name}&appid=${api}`
+`https://api.openweathermap.org/data/2.5/weather?q=${city_name}&appid=${api}`
 https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
 
 	// Calling the API
