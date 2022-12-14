@@ -24,6 +24,8 @@ body {
     text-align: center;
 
 }
+
+
 .wrapper {
   padding-top: 30px;
   padding-left: 20px;
@@ -32,25 +34,29 @@ body {
 }
 
 header {
-
+  
+  font-family: Copperplate;
+  font-weight:100;
+  text-decoration: underline;
+  text-shadow: #e7e9eb;
   text-align: center;
-  flex-wrap: inherit;
-  flex-shrink: inherit;
-  padding: 20px;
-  padding-top: 0px;
-  color: hsl(206, 17%, 28%);
-  background-color: bisque;
+  flex: 1 1 auto;
+  margin: 0 auto;
+  max-width: 600px;
+  padding: 10px 20px;
+  color: hsl(206, 77%, 66%);
+  background-color: rgb(19, 153, 216);
   width: 600px;
   border-style: groove;
   border-width: 5px;
-  margin-left: 435px;
+  
 
 }
 
 h2 {
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    color: rgba(241, 197, 131, 0.902);
-    text-decoration-color: rgb(247, 73, 5) ;
+    color: rgba(72, 72, 72, 0.902);
+    text-decoration-color: rgb(157, 149, 146) ;
     text-decoration-line: underline;
 }
 
@@ -69,6 +75,22 @@ h2 {
   
 }
 
+section {
+  background-color: hsl(174, 79%, 42%);
+  border-style: groove;
+  border-radius: 5px;
+  border-width: 10px;
+  border-color: rgba(205, 31, 31, 0.647) orange;
+  box-shadow: rgba(194, 118, 25, 0.15) 0px 2px 8px 0px;
+  color: hsl(206, 17%, 28%);
+  font-size: 18px;
+  margin: 0 auto;
+  max-width: 600px;
+  padding: 10px 20px;
+  
+
+}
+
 .card-header::after {
   content: " ";
   display: block;
@@ -81,6 +103,7 @@ h2 {
 
 .card-body {
   min-height: 100px;
+  flex-wrap: wrap;
 }
 
 .card-footer {
@@ -104,8 +127,9 @@ h2 {
 
 .btn {
   border: none;
-  background-color: hsl(360, 91%, 36%);
-  border-radius: 25px;
+  background-color: rgb(235, 99, 99);
+  border-radius: 35px;
+  border-style: groove;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 6px 0px rgba(0, 0, 0, 0.2) 0px 1px 1px
     0px;
   color: hsl(0, 0%, 100%);
