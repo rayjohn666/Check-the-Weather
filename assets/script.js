@@ -20,15 +20,14 @@ let submitbtn = document.getElementById("Enter")
 const kelvin = 273;
 
 function getWeatherData(event){
-	event.preventDefault()
 	const api = '14b780f136771b55290b6cacd639b311';
-	console.log(document.getElementById("cityName").value)
-	let city_name = document.getElementById("cityName").value
+	console.log(document.getElementById("cityInput").value)
+	let city_name = document.getElementById("cityInput").value
 
 	// API URL
 	const base =
 `https://api.openweathermap.org/data/2.5/weather?q=${city_name}&appid=${api}`
-https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
+//https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
 
 	// Calling the API
 	fetch(base)
@@ -40,21 +39,28 @@ https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
 		let temp = data.main.temp;
 		let humidity = data.main.humidity;
 		let windspeed = data.wind.speed;
+		let currentday = new Date(data.dt*1000).toLocaleDateString()
 
 		document.getElementById("singledaydata").innerHTML = "";
 
+		 let currentday_paragraph = document.createElement("p")
+		 currentday_paragraph.innerHTML = `Current Day:  ${currentday}`
+		 
 		let temperature_paragraph = document.createElement("p")
-		temperature_paragraph.innerHTML = `Temperature is ; ${temp}`
+		temperature_paragraph.innerHTML = `Temperature is : ${temp}`
 
 		let humidity_paragraph = document.createElement("p")
-		humidity_paragraph.innerHTML = `Humidity is ; ${humidity}`
+		humidity_paragraph.innerHTML = `Humidity is : ${humidity}`
 
 		let wind_paragraph = document.createElement("p")
-		wind_paragraph.innerHTML = `Wind speed is ; ${windspeed}`
+		wind_paragraph.innerHTML = `Wind speed is : ${windspeed}`
 
-		document.getElementById("singledaydata").append(temperature_paragraph, humidity_paragraph, wind_paragraph)
+		document.getElementById("singledaydata").appendChild(currentday_paragraph)
+		document.getElementById("singledaydata").appendChild(temperature_paragraph)
+		document.getElementById("singledaydata").appendChild(humidity_paragraph)
+		document.getElementById("singledaydata").appendChild(wind_paragraph)
 
-		forecastdata(city_name,api)
+		GetInfo(city_name,api)
 		// temperature.textContent =
 		// 	Math.floor(data.main.temp - kelvin) + "°C";
 		// summary.textContent = data.weather[0].description;
@@ -83,24 +89,23 @@ https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
 submitbtn.addEventListener("click",getWeatherData)
 
 
-function GetInfo() {
+function GetInfo(city_name,api_key) {
 
-    var newName = document.getElementById("cityInput");
     var cityName = document.getElementById("cityName");
-    cityName.innerHTML = "--"+newName.value+"--";
+    cityName.innerHTML = "--"+city_name+"--";
 
-fetch('https://api.openweathermap.org/data/2.5/forecast?q='+newName.value+'&appid=32ba0bfed592484379e51106cef3f204')
+fetch('https://api.openweathermap.org/data/2.5/forecast?q='+city_name+'&appid=32ba0bfed592484379e51106cef3f204')
 .then(response => response.json())
 .then(data => {
-
+console.log(data)
     //Getting the min and max values for each day
     for(i = 0; i<5; i++){
-        document.getElementById("day" + (i+1) + "Min").innerHTML = "Min: " + Number(data.list[i].main.temp_min - 273.15).toFixed(1)+ "°";
+        document.getElementById("day" + (i+1) + "Min").innerHTML = "Temp" + "Min: " + Number(data.list[i].main.temp_min - 273.15).toFixed(1)+ "°";
         //Number(1.3450001).toFixed(2); // 1.35
     }
 
     for(i = 0; i<5; i++){
-        document.getElementById("day" + (i+1) + "Max").innerHTML = "Max: " + Number(data.list[i].main.temp_max - 273.15).toFixed(2) + "°";
+        document.getElementById("day" + (i+1) + "Max").innerHTML = "Temp" + "Max: " + Number(data.list[i].main.temp_max - 273.15).toFixed(2) + "°";
     }
     //------------------------------------------------------------
 
@@ -116,12 +121,12 @@ fetch('https://api.openweathermap.org/data/2.5/forecast?q='+newName.value+'&appi
 
 })
 
-.catch(err => alert("Something Went Wrong: Try Checking Your Internet Coneciton"))
+.catch(err => console.log("Something Went Wrong: Try Checking Your Internet Coneciton"))
 }
 
 function DefaultScreen(){
     document.getElementById("cityInput").defaultValue = "London";
-    GetInfo();
+    getWeatherData();
 }
 
 
